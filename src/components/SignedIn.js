@@ -21,6 +21,7 @@ import { LogoTitle } from "../components/Icons/logoTitle";
 import { Chat } from "../components/Chats";
 import { iconColour } from "./Colours";
 import { Categories } from "./Categories";
+import { ListOfDoctors } from "./ListOfDoctors";
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
@@ -103,7 +104,7 @@ class SignedIn extends Component {
           }
 
           <Categories/>
-          {/* <ListOfDoctors/> */}
+          <ListOfDoctors/>
 
         </View>
         
