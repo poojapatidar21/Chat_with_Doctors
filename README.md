@@ -1,5 +1,6 @@
 # Chat_with_Doctors
-#Motivation behind the project "\n"
+#Motivation behind the project
+
 As no one wants to go out to doctor, without any serious emergency. We are building this project to help the patience, who need doctors advice or consultance. 
 
 #Inside the project
