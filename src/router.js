@@ -12,6 +12,7 @@ const headerStyle = {
 import {MenuProvider} from 'react-native-popup-menu';
 import  SignedIn  from "./components/SignedIn";
 import Login from "./components/login";
+import enterInfo from "./components/enterInfo";
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
@@ -50,10 +51,11 @@ export class RootNavigator extends Component
           <NavigationContainer>
               <Stack.Navigator 
               // initialRouteName={(this.state.isSignedIn===true)?((this.state.isDetailsEnter===true)?"SignedIn":"EnterInfo"):"Login"}
-              initialRouteName={"SignedIn"}
+              initialRouteName={"enterInfo"}
               >        
                 <Stack.Screen name="SignedIn" options={{headerShown: false}} component= {SignedIn}/>
-                <Stack.Screen name="Login" options={{headerShown: false}} component= {Login}/>
+              <Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />
+              <Stack.Screen name="enterInfo" options={{headerShown: false}} component= {enterInfo}/>
               </Stack.Navigator>
           </NavigationContainer>
         </MenuProvider>

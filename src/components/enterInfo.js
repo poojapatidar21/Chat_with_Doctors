@@ -18,26 +18,25 @@ class EnterInfo extends Component{
             userId:"",
             number:"",
             detailsComplete:false,
-            loading:true,
+            loading:false,
         };
         this.setName = this.setName.bind(this);
-        this.setDOB = this.setDOB.bind(this);
         this.addUser = this.addUser.bind(this);
-        this.showPicker = this.showPicker.bind(this);
+        
         
     }
-    async componentDidMount() 
-    {
-        await getUserId()
-            .then(res => this.setState({ userId: res}))
-            .catch(err => alert(err));
+    // async componentDidMount() 
+    // {
+    //     await getUserId()
+    //         .then(res => this.setState({ userId: res}))
+    //         .catch(err => alert(err));
             
-        console.log(this.state.userId)
-        await getNumber()
-            .then(res => this.setState({ number: res}))
-            .catch(err => alert(err));  
-        this.setState({loading:false})
-    }
+    //     console.log(this.state.userId)
+    //     await getNumber()
+    //         .then(res => this.setState({ number: res}))
+    //         .catch(err => alert(err));  
+    //     this.setState({loading:false})
+    // }
     setName(name){
         this.setState({userName:name})
     }
