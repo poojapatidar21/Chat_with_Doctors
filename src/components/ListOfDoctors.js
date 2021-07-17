@@ -24,7 +24,8 @@ export class ListOfDoctors extends Component{
     constructor(props){
         super(props);
         this.state={
-
+            selectedItemName:undefined,
+            list:list,
         }
     }
 
@@ -40,8 +41,29 @@ export class ListOfDoctors extends Component{
         </ListItem>
     )
 
+    getList(name)
+    {
+        if(name==="")
+        {
+            this.setState({list:list});
+        }
+        else
+        {
+            let list1 = list.filter((item) => {
+                return item.specialisation.toLowerCase().match(name)
+              })
+            this.setState({list:list1});
+        }
+    }
+
     render()
     {
+        console.log(this.state.selectedItemName,this.props.selectedItemName)
+        if(this.state.selectedItemName!==this.props.selectedItemName)
+        {
+            this.getList(this.props.selectedItemName);
+            this.setState({selectedItemName:this.props.selectedItemName});
+        }
         return(
             <View style={{backgroundColor:"#ffffff"}}>
                 <Text style={{fontSize:20, alignSelf:"center"}}>List of doctors</Text>
@@ -49,8 +71,9 @@ export class ListOfDoctors extends Component{
                     <FlatList
                     keyboardShouldPersistTaps="handled"
                     keyExtractor={this.keyExtractor}
-                    data={list}
+                    data={this.state.list}
                     renderItem={this.renderItem}
+                    extraData={this.props.selectedItemName}
                     />
                 </View>
             </View>
