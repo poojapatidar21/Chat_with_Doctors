@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "888925833185",
+    "project_id": "doctor-chat-app-1a352",
+    "storage_bucket": "doctor-chat-app-1a352.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888925833185:android:7206266d5f23bfd0d134a0",
+        "android_client_info": {
+          "package_name": "com.doctorchatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888925833185-vrdp53db4rhsfcfg37bpmlm94af1ergl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiJYGvYMeDHplfHSm6Qgq4kmFg64nPEEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888925833185-vrdp53db4rhsfcfg37bpmlm94af1ergl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

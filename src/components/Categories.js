@@ -2,22 +2,22 @@ import React,{ Component } from "react";
 import { Image, View,TouchableOpacity, Modal, FlatList, Text } from "react-native";
 import { ListItem } from "react-native-elements";
 
-const profilePic  =require("../images/profile-user.png");
-const dermatologist =require("../images/dermatologist.jpg");
-const diet_advice =require("../images/diet_advice.png");
-const gastronterology =require("../images/gastronterology.png");
-const gynocology =require("../images/gynocology.png");
-const homeopathy =require("../images/homeopathy.jpg");
+// const profilePic = require("../images/profile-user.png");
+const dermatologist = require("../images/dermatologist.jpg");
+const diet_advice = require("../images/diet_advice.png");
+const gastronterology = require("../images/gastronterology.png");
+const gynocology = require("../images/gynocology.png");
+const homeopathy = require("../images/homeopathy.jpg");
 const medical = require("../images/medical.jpg");
-const pediatric =require("../images/pediatric.png");
-const psychiatry =require("../images/psychiatry.png");
+const pediatric = require("../images/pediatric.png");
+const psychiatry = require("../images/psychiatry.png");
 const sexology = require("../images/sexology.jpg");
-const orthopedic= require("../images/orthopedic.jpg")
-const opthalmologist= require("../images/opthalmologist.jpg")
-const dentist = require("../images/dentist.jpg")
-const urologist = require("../images/urology.png")
-const ayurveda = require("../images/ayurveda.jpg")
-const surgeon = require("../images/surgeon.jpg")
+const orthopedic = require("../images/orthopedic.jpg");
+const opthalmologist = require("../images/opthalmologist.jpg");
+const dentist = require("../images/dentist.jpg");
+const urologist = require("../images/urology.png");
+const ayurveda = require("../images/ayurveda.jpg");
+const surgeon = require("../images/surgeon.jpg");
 
 let list = [
     {
@@ -54,7 +54,7 @@ let list = [
         imageUrl:orthopedic,
         name:"Orthopedic",
     },
-    ,{
+    {
         imageUrl:opthalmologist,
         name:"Opthalmologist",
     },
