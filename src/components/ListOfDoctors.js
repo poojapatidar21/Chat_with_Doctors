@@ -3,13 +3,20 @@ import { Image, View,TouchableOpacity, Modal, FlatList, Text } from "react-nativ
 import { ListItem } from "react-native-elements";
 
 const profilePic  =require("../images/profile-user.png");
+const pooja  =require("../images/poojaPatidar.jpg");
+const gourav  =require("../images/gourav.jpg");
 
 
 let list=[
     {
-        imageUrl:profilePic,
-        name:"xyz",
-        specialisation:"fghjkjhgfdrtyuil",
+        imageUrl:gourav,
+        name:"Dr. Gourav Goel",
+        specialisation:"diet_advice",
+    },
+    {
+        imageUrl:pooja,
+        name:"Dr. Pooja Patidar",
+        specialisation:"nerological",
     }
 ]
 
@@ -27,8 +34,8 @@ export class ListOfDoctors extends Component{
             <Image source={item.imageUrl} 
                 style={{width: 100, height: 100, borderRadius: 400/ 2}} />
             <ListItem.Content>
-                <ListItem.Title>{item.name}</ListItem.Title>
-                <ListItem.Subtitle>{item.specialisation}</ListItem.Subtitle>
+                <ListItem.Title style={{fontSize:20}}>{item.name}</ListItem.Title>
+                <ListItem.Subtitle>{"Specialisation in "+item.specialisation}</ListItem.Subtitle>
             </ListItem.Content>
         </ListItem>
     )
@@ -36,7 +43,8 @@ export class ListOfDoctors extends Component{
     render()
     {
         return(
-            <View>
+            <View style={{backgroundColor:"#ffffff"}}>
+                <Text style={{fontSize:20, alignSelf:"center"}}>List of doctors</Text>
                 <View>
                     <FlatList
                     keyboardShouldPersistTaps="handled"

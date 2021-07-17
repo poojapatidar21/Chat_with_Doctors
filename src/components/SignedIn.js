@@ -19,7 +19,7 @@ import { MenuIcon } from "../components/Icons/MenuIcon";
 import { SearchIcon } from "../components/Icons/SearchIcon";
 import { LogoTitle } from "../components/Icons/logoTitle";
 import { Chat } from "../components/Chats";
-import { iconColour } from "./Colours";
+import { HeaderbackgroundColor, iconColour } from "./Colours";
 import { Categories } from "./Categories";
 import { ListOfDoctors } from "./ListOfDoctors";
 const DEVICE_WIDTH = Dimensions.get('window').width;
@@ -33,9 +33,11 @@ class SignedIn extends Component {
       this.state={
         isSearchOpen:false,
         showChats:false,
+        selectedItemName:"",
       }
       this.showSearch=this.showSearch.bind(this);
       this.hideSearch=this.hideSearch.bind(this);
+      this.setCategory=this.setCategory.bind(this);
     }
     backAction = () => {   
         return true;
@@ -55,11 +57,16 @@ class SignedIn extends Component {
       this.setState({isSearchOpen:false,searchedList:[]});
     }
 
+    setCategory(name)
+    {
+      this.setState({selectedItemName:name});
+    }
+
     render()
     {
       return (
         <View style={{flex:1}}>
-          <View style={{flexDirection:"row", width:DEVICE_WIDTH, justifyContent:"space-between", backgroundColor:"#000000"}}>
+          <View style={{flexDirection:"row", width:DEVICE_WIDTH, justifyContent:"space-between", backgroundColor:HeaderbackgroundColor}}>
             {
             this.state.isSearchOpen
             &&
@@ -103,8 +110,8 @@ class SignedIn extends Component {
             </Modal>
           }
 
-          <Categories/>
-          <ListOfDoctors/>
+          <Categories setCategory={this.setCategory}/>
+          <ListOfDoctors selectedItemName={this.state.selectedItemName}/>
 
         </View>
         

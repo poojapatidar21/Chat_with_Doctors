@@ -11,7 +11,7 @@ const gynocology =require("../images/gynocology.png");
 const homeopathy =require("../images/homeopathy.jpg");
 const medical =require("../images/medical.jpg");
 const nerological =require("../images/nerological.png");
-const psychiatry =require("../images/psychiatryr.png");
+const psychiatry =require("../images/psychiatry.png");
 const sexology =require("../images/sexology.jpg");
 
 let list=[
@@ -68,10 +68,12 @@ export class Categories extends Component{
         if(this.state.selectedItemName===name)
         {
             this.setState({selectedItemName:""});
+            this.props.setCategory("");
         }
         else
         {
             this.setState({selectedItemName:name});
+            this.props.setCategory(name);
         }
     }
 
@@ -82,7 +84,7 @@ export class Categories extends Component{
         {
             return(
                 <ListItem onPress={() =>this.onSelect(item.name)}>
-                    <View style={{flexDirection:"column",backgroundColor:"red"}}>
+                    <View style={{flexDirection:"column"}}>
                         <Image source={item.imageUrl} 
                             style={{width: 60, height: 60, borderRadius: 400/ 2}} />
                         <Text style={{alignSelf:"center"}}>{item.name}</Text>
@@ -94,7 +96,7 @@ export class Categories extends Component{
         {
             return(
                 <ListItem onPress={() =>this.onSelect(item.name)}>
-                    <View style={{flexDirection:"column"}}>
+                    <View style={{flexDirection:"column"}} opacity={0.5}>
                         <Image source={item.imageUrl} 
                             style={{width: 60, height: 60, borderRadius: 400/ 2}} />
                         <Text style={{alignSelf:"center"}}>{item.name}</Text>

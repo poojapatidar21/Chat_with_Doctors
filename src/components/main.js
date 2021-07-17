@@ -1,5 +1,6 @@
 import React, {useEffect, Component } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import { isDetailsEntered, isSignedIn } from '../auth';
 
 import {RootNavigator} from "../router"
 
@@ -7,15 +8,30 @@ import {RootNavigator} from "../router"
     constructor(props) {
         super(props);
         this.state = {
-            
+            checkedSignIn:false,
+            signedIn:false,
+            checkedDetailsEntered:false,
+            detailsEntered:false,
         };
     }
     async componentDidMount() {
+        await isSignedIn()
+        .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
+        .catch(err => alert(err));
+    
+        await isDetailsEntered()
+            .then(res => this.setState({ detailsEntered: res, checkedDetailsEntered: true }))
+            .catch(err => alert(err));
 
     }
     render()
     {   
-        return <RootNavigator/>;
+        const {checkedSignIn,signedIn,detailsEntered, checkedDetailsEntered} = this.state;
+
+        if (!(checkedSignIn && checkedDetailsEntered)) {
+          return null;
+        }
+        return <RootNavigator signInStatus={signedIn}  detailsEntered={detailsEntered}/>;
     }
 }   
 
