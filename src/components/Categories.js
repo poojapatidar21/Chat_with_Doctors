@@ -3,77 +3,53 @@ import { Image, View,TouchableOpacity, Modal, FlatList, Text } from "react-nativ
 import { ListItem } from "react-native-elements";
 
 const profilePic  =require("../images/profile-user.png");
+const pediatric =require("../images/pediatric.png");
 const dermatologist =require("../images/dermatologist.jpg");
 const diet_advice =require("../images/diet_advice.png");
 const gastronterology =require("../images/gastronterology.png");
 const gynocology =require("../images/gynocology.png");
 const homeopathy =require("../images/homeopathy.jpg");
-const medical = require("../images/medical.jpg");
-const pediatric =require("../images/pediatric.png");
+const medical =require("../images/medical.jpg");
+const nerological =require("../images/nerological.png");
 const psychiatry =require("../images/psychiatry.png");
-const sexology = require("../images/sexology.jpg");
-const orthopedic= require("../images/orthopedic.jpg")
-const opthalmologist= require("../images/opthalmologist.jpg")
-const dentist = require("../images/dentist.jpg")
-const urologist = require("../images/urology.png")
-const ayurveda = require("../images/ayurveda.jpg")
-const surgeon = require("../images/surgeon.jpg")
+const sexology =require("../images/sexology.jpg");
 
-let list = [
+let list=[
     {
-        imageUrl:ayurveda,
-        name:"Ayurveda",
+        imageUrl:pediatric,
+        name:"pediatric",
     },
     {
         imageUrl:dermatologist,
-        name:"Dermatologist",
-    },
-    {
-        imageUrl:dentist,
-        name:"Dentist",
+        name:"dermatologist",
     },
     {
         imageUrl:diet_advice,
-        name:"Diet & Nutrition ",
+        name:"diet_advice",
     },
     {
         imageUrl:gastronterology,
-        name:"Gastroenterologist",
+        name:"gastronterology",
     },
     {
         imageUrl:gynocology,
-        name:"Gynaecologist",
+        name:"gynocology",
     },
     {
         imageUrl:homeopathy,
-        name:"Homeopath",
+        name:"homeopathy",
     },{
         imageUrl:medical,
-        name:"General Physician",
+        name:"medical",
     },{
-        imageUrl:orthopedic,
-        name:"Orthopedic",
-    },
-    ,{
-        imageUrl:opthalmologist,
-        name:"Opthalmologist",
-    },
-    {
-        imageUrl:pediatric,
-        name:"Paediatrician",
+        imageUrl:nerological,
+        name:"nerological",
     },{
         imageUrl:psychiatry,
-        name:"Psychiatrist",
+        name:"psychiatry",
     },{
         imageUrl:sexology,
-        name:"Sexologist",
-    }
-    ,{
-        imageUrl:surgeon,
-        name:"Surgeon",
-    },{
-        imageUrl:urologist,
-        name:"Urologist",
+        name:"sexology",
     }
     
 ]
@@ -103,7 +79,6 @@ export class Categories extends Component{
 
     keyExtractor = (item, index) => index.toString()
     renderItem = ({item}) => {
-        console.log(this.state.selectedItemName,item);
         if(this.state.selectedItemName===item.name)
         {
             return(
