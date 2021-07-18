@@ -16,27 +16,39 @@ class EnterInfo extends Component{
         super(props);
         this.state ={
             userName: null,
-            Email:null,
+            Email: null,
+            degree: null,
+            experience: null,
+            about:null,
             userId:"",
             number: "",
             gender:null,
             genderText: "Gender",
             showGenderModal: false,
             userCategory:null,
-            userCategoryText: "You are registering as",
-            showuserCategoryModal:false,
+            userCategoryText: "Register as",
+            showuserCategoryModal: false,
+            Category:null,
+            CategoryText: "Specialization",
+            showCategoryModal:false,
             detailsComplete:false,
             loading: false,
             genderList: [{ name: "Male" }, { name: "Female" }, { name: "Other" }],
-            userCategoryList:[{name:"Doctor"},{name:"Patient"}],
+            userCategoryList: [{ name: "Doctor" }, { name: "Patient" }],
+            CategoryList:[{name:"Ayurveda"},{name:"Denstist"},{name:"Dermatologist"},{name:"Diet & Nutrition Advicer"},{name:"Gasteroterology"},{name:"Gynocology"},{name:"General Physician"},{name:"Homeopathy"},{name:"Opthalmology"},{name:"Orthopedic"},{name:"Paediatric"},{name:"Psychiatric"},{name:"Sexology"},{name:"Surgeon"},{name:"Urology"}],
         };
         this.setName = this.setName.bind(this);
         this.setEmail = this.setEmail.bind(this);
+        this.setdegree = this.setdegree.bind(this);
+        this.setexperience = this.setexperience.bind(this);
+        this.setabout = this.setabout.bind(this);
         this.addUser = this.addUser.bind(this);
         this.showGenderModal = this.showGenderModal.bind(this);
         this.onGenderSelect = this.onGenderSelect.bind(this);
         this.showuserCategoryModal = this.showuserCategoryModal.bind(this);
         this.onuserCategorySelect = this.onuserCategorySelect.bind(this);
+        this.showCategoryModal = this.showCategoryModal.bind(this);
+        this.onCategorySelect = this.onCategorySelect.bind(this);
         
         
     }
@@ -58,6 +70,16 @@ class EnterInfo extends Component{
     setEmail(email){
         this.setState({Email:email})
     }
+    setdegree(Degree){
+        this.setState({degree:Degree})
+    }
+    setexperience(Experience){
+        this.setState({experience:Experience})
+    }
+    setabout(About)
+    {
+        this.setState({about:About})
+    }
     showGenderModal()
     {
         this.setState({showGenderModal:true});
@@ -65,6 +87,9 @@ class EnterInfo extends Component{
     showuserCategoryModal()
     {
         this.setState({showuserCategoryModal:true});
+    }showCategoryModal()
+    {
+        this.setState({showCategoryModal:true});
     }
     onGenderSelect = (item) => {  
         this.setState({showGenderModal:false});
@@ -75,6 +100,11 @@ class EnterInfo extends Component{
         this.setState({showuserCategoryModal:false});
         this.setState({userCategoryText:item.name,userCategoryTextColor:"#000000"});
         this.setState({userCategory:item.name});
+    }
+    onCategorySelect = (item) => {  
+        this.setState({showCategoryModal:false});
+        this.setState({CategoryText:item.name,CategoryTextColor:"#000000"});
+        this.setState({Category:item.name});
     }
     renderGenderItem = ({item}) => {
         return (
@@ -120,9 +150,32 @@ class EnterInfo extends Component{
         </TouchableOpacity>
         )
     }
+    renderCategoryItem = ({item}) => {
+        return (
+        <TouchableOpacity
+            style={{
+            flexDirection: "row",
+            backgroundColor: "#f3f3f3",
+            padding: 15,
+            paddingLeft: 5,
+            alignItems: "center",
+            borderWidth: 1,
+            borderBottomWidth: 0,
+            borderColor: "rgba(0,0,0,0.2)",
+            zIndex: 2,}}
+            onPress={() =>this.onCategorySelect(item)}
+        >
+            <Text style={{
+            fontWeight: "500",
+            color: "#000000",
+            paddingHorizontal: 20,}}>{item.name}</Text>
+        </TouchableOpacity>
+        )
+    }
+
     async addUser()
     {
-        console.log(this.state.userName,this.state.Email,this.state.gender,this.state.userCategory)
+        console.log(this.state.userName,this.state.Email,this.state.gender,this.state.userCategory,this.state.Category,this.state.degree,this.state.about)
         // if(!this.state.userName)
         // {
         //     alert("enter name");
@@ -261,6 +314,61 @@ class EnterInfo extends Component{
                     >
                 </FlatList>
             </View>}
+
+            <TouchableOpacity
+            onPress={this.showCategoryModal}
+            style={{ width:"80%",}}
+            >
+                <Text style={{
+                width:"80%",
+                marginVertical:10,
+                minHeight: 35,
+                borderBottomColor: "rgba(0, 0, 0, 0.2)",
+                borderBottomWidth: 1,
+                color: this.state.CategoryTextColor}}
+                >
+                {this.state.CategoryText}
+                </Text>
+                </TouchableOpacity>
+                {this.state.showCategoryModal &&
+                    <View style={styles.list}>
+                    
+                <FlatList style={{
+                    maxHeight: 220,
+                    marginTop: 35 ,
+                    width: "100%",
+                    backgroundColor: "white",
+                    elevation: 5,}}
+                    keyExtractor={this.keyExtractor}
+                    data={this.state.CategoryList}
+                    renderItem={this.renderCategoryItem}
+                    >
+                </FlatList>
+                    </View>}
+                    <View style={styles.inputwrapper}>
+                <TextInput style={styles.input}
+                placeholder="Education"
+                placeholderTextColor="black"
+                underlineColorAndroid="transparent"
+                onChangeText={text => this.setdegree(text)}
+                />
+                </View>
+                <View style={styles.inputwrapper}>
+                <TextInput style={styles.input}
+                placeholder="Experience Years"
+                placeholderTextColor="black"
+                underlineColorAndroid="transparent"
+                onChangeText={text => this.setexperience(text)}
+                />
+                </View>
+                <View style={styles.inputwrapper}>
+                <TextInput style={styles.input}
+                placeholder="About"
+                placeholderTextColor="black"
+                underlineColorAndroid="transparent"
+                onChangeText={text => this.setabout(text)}
+                />
+                </View>
 
                 <TouchableOpacity
                 activeOpacity={1}
