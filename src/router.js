@@ -51,7 +51,7 @@ export class RootNavigator extends Component
           <NavigationContainer>
               <Stack.Navigator 
               // initialRouteName={(this.state.isSignedIn===true)?((this.state.isDetailsEnter===true)?"SignedIn":"EnterInfo"):"Login"}
-              initialRouteName={"login"}
+              initialRouteName={"SignedIn"}
               >        
                 <Stack.Screen name="SignedIn" options={{headerShown: false}} component= {SignedIn}/>
               <Stack.Screen name="Login" options={{ headerShown: false }} component={Login} />
