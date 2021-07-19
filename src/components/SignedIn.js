@@ -112,7 +112,7 @@ class SignedIn extends Component {
             visible={this.state.showChats}
             onRequestClose={() => { this.setState({showChats:false})  } }
             animationType="slide">
-            <Chat/>
+            <Chat navigation={this.props.navigation}/>
             </Modal>
           }
 

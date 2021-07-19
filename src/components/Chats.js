@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
-import { Text, View,BackHandler, StyleSheet, FlatList, ListViewBase,Image,Button,TouchableOpacity, PermissionsAndroid, Modal, TouchableWithoutFeedback, RefreshControl } from 'react-native';
+import { Text, View,Dimensions,BackHandler, StyleSheet, FlatList, ListViewBase,Image,Button,TouchableOpacity, PermissionsAndroid, Modal, TouchableWithoutFeedback, RefreshControl } from 'react-native';
 import { ListItem, Avatar,con } from 'react-native-elements'
 const profilePic  =require('../images/profile-user.png')
+let pooja  =require("../images/poojaPatidar.jpg");
+let gourav  =require("../images/gourav.jpg");
 
 import Icon2 from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { findDate } from './getDates';
+import { PopProfilePic } from './PopUpProfilePic';
+import ChatBox from './ChatBox';
+
+const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 
+let list=[
+  {
+      imageUrl:gourav,
+      userName:"Dr. Gourav Goel",
+      lastMessage:"kaisi hai",
+      totalCount:1
+  },
+  {
+      imageUrl:pooja,
+      userName:"Dr. Pooja Patidar",
+      lastMessage:"kaisi hai",
+      totalCount:2
+  }
+]
 
 export class Chat extends Component{
     constructor(props)
@@ -34,7 +56,6 @@ export class Chat extends Component{
             isFetching:false,
         }
         this.goToChat = this.goToChat.bind(this);
-        this.goToSearchContacts=this.goToSearchContacts.bind(this);
         this.getList=this.getList.bind(this);
         this.onRefresh=this.onRefresh.bind(this);
         this.renderItem=this.renderItem.bind(this);
@@ -42,84 +63,77 @@ export class Chat extends Component{
     }
 
     async componentDidMount() {
-      
-      let myUserId = await getUserId();
-      this.setState({ myuserId: myUserId})
-      
-      if(this.props.isFocused)
-      {
-        this.setState({isFetching:true});
-        let res1 = await fetch(`https://nociw.herokuapp.com/chatList?id=${this.state.myuserId}`);  
-        let jsonResponse=await res1.json();
-        if(jsonResponse.statusCode===200)
-        {
-          if(jsonResponse.chat.length<10)
-          {
-            this.setState({noMoreData:true});
-          }
-          if(jsonResponse.length>0)
-          this.setState({lastpostfetchDate:jsonResponse.chat[jsonResponse.chat.length-1].LastUpdate});
-          
-          let chat=jsonResponse.chat;
-          for(let i=0;i<chat.length;i++)
-          { 
-            if(chat[i].userId2)
-            {
-              let imageName = `${chat[i].userId2}dp.jpg`;
-              let imageRef =storage().ref(imageName);
-              await imageRef
-              .getDownloadURL()
-              .then((url) => {
-                chat[i].imageUrl=url   
-              })
-              .catch((e) =>{
-              });  
-              let userName =await GetUserName2(chat[i].number);
-              chat[i].userName=userName;
-              this.setState({chatList:[...this.state.chatList,chat[i]]});
-            }      
-          }
-          this.setState({stopFetching:false,isFetching:false});
-        }
-      }
+      this.setState({isFetching:true});
+      // let res1 = await fetch(`x/chatList?id=${this.state.myuserId}`);  
+      // let jsonResponse=await res1.json();
+      // if(jsonResponse.statusCode===200)
+      // {
+      //   if(jsonResponse.chat.length<10)
+      //   {
+      //     this.setState({noMoreData:true});
+      //   }
+      //   if(jsonResponse.length>0)
+      //   this.setState({lastpostfetchDate:jsonResponse.chat[jsonResponse.chat.length-1].LastUpdate});
+        
+      //   let chat=jsonResponse.chat;
+      //   for(let i=0;i<chat.length;i++)
+      //   { 
+      //     if(chat[i].userId2)
+      //     {
+      //       let imageName = `${chat[i].userId2}dp.jpg`;
+      //       let imageRef =storage().ref(imageName);
+      //       await imageRef
+      //       .getDownloadURL()
+      //       .then((url) => {
+      //         chat[i].imageUrl=url   
+      //       })
+      //       .catch((e) =>{
+      //       });  
+      //       let userName =await GetUserName2(chat[i].number);
+      //       chat[i].userName=userName;
+      //       this.setState({chatList:[...this.state.chatList,chat[i]]});
+      //     }      
+      //   }
+      //   this.setState({stopFetching:false,isFetching:false});
+      // }
     }
     async loadMoreResult(distanceFromEnd)
     {
       if(this.state.noMoreData===false && this.state.stopFetching===false)
       {
         this.setState({stopFetching:true,isFetching:true});
-        let res1 = await fetch(`https://nociw.herokuapp.com/chatListFetchMore?id=${this.state.myuserId}`);  
-        let jsonResponse=await res1.json();
-        if(jsonResponse.statusCode===200)
-        {
-          if(jsonResponse.chat.length<10)
-          {
-            this.setState({noMoreData:true});
-          }
-          if(jsonResponse.length>0)
-          this.setState({lastpostfetchDate:jsonResponse.chat[jsonResponse.chat.length-1].LastUpdate});
+        // let res1 = await fetch(`x/chatListFetchMore?id=${this.state.myuserId}`);  
+        // let jsonResponse=await res1.json();
+        // if(jsonResponse.statusCode===200)
+        // {
+        //   if(jsonResponse.chat.length<10)
+        //   {
+        //     this.setState({noMoreData:true});
+        //   }
+        //   if(jsonResponse.length>0)
+        //   this.setState({lastpostfetchDate:jsonResponse.chat[jsonResponse.chat.length-1].LastUpdate});
           
-          let chat=jsonResponse.chat;
-          for(let i=0;i<chat.length;i++)
-          { 
-            if(chat[i].userId2)
-            {
-              let imageName = `${chat[i].userId2}dp.jpg`;
-              let imageRef =storage().ref(imageName);
-              await imageRef
-              .getDownloadURL()
-              .then((url) => {
-                chat[i].imageUrl=url   
-              })
-              .catch((e) =>{
-              });  
-              let userName =await GetUserName2(chat[i].number);
-              chat[i].userName=userName;
-              this.setState({chatList:[...this.state.chatList,chat[i]]});
-            }      
-          }
-          this.setState({stopFetching:false,isFetching:false});
-        }
+        //   let chat=jsonResponse.chat;
+        //   for(let i=0;i<chat.length;i++)
+        //   { 
+        //     if(chat[i].userId2)
+        //     {
+        //       let imageName = `${chat[i].userId2}dp.jpg`;
+        //       let imageRef =storage().ref(imageName);
+        //       await imageRef
+        //       .getDownloadURL()
+        //       .then((url) => {
+        //         chat[i].imageUrl=url   
+        //       })
+        //       .catch((e) =>{
+        //       });  
+        //       let userName =await GetUserName2(chat[i].number);
+        //       chat[i].userName=userName;
+        //       this.setState({chatList:[...this.state.chatList,chat[i]]});
+        //     }      
+        //   }
+        //   this.setState({stopFetching:false,isFetching:false});
+        // }
       }
     }
 
@@ -131,30 +145,28 @@ export class Chat extends Component{
     async onRefresh()
     {
       this.setState({refreshing:true});
-      let res1 = await fetch(`https://nociw.herokuapp.com/chatList?id=${this.state.myuserId}`);  
-      let jsonResponse=await res1.json();
-      if(jsonResponse.statusCode===200)
-      {
-        let chat=jsonResponse.chat;
-        await GetlistOfChatsfromServer(chat).then(async(chatList)=>{
-          this.setState({chatList:chatList});
-        })
-      }
+      // let res1 = await fetch(`x/chatList?id=${this.state.myuserId}`);  
+      // let jsonResponse=await res1.json();
+      // if(jsonResponse.statusCode===200)
+      // {
+      //   let chat=jsonResponse.chat;
+      //   await GetlistOfChatsfromServer(chat).then(async(chatList)=>{
+      //     this.setState({chatList:chatList});
+      //   })
+      // }
       this.setState({refreshing:false});
     }
     async goToChat(item)
     {   
-      const {navigation} =this.props;
-      navigation.navigate("ChatBox",{
-        userId: item.userId2,
-        userName:item.userName,
-        number:item.number,
-        chatId:item.chatId
-      })
+      // userId: item.userId2,
+      //   userName:item.userName,
+      //   number:item.number,
+      //   chatId:item.chatId
+      this.setState({goToChatBoolean:true});
     }
     keyExtractor = (item, index) => index.toString()
     renderItem({item}){
-
+      console.log(item);
       let date=findDate(item.LastUpdate)
       return(
         <ListItem onPress={() =>this.goToChat(item)}>
@@ -174,38 +186,30 @@ export class Chat extends Component{
       )
     }
 
-    goToSearchContacts()
-    {
-      const {navigation} =this.props;
-      navigation.navigate("SearchContacts")
-    }
     render()
     {
         return(
         <View style={{flex:1}}>
-        <FlatList 
-        onEndReachedThreshold={0.01}
-        onEndReached={({ distanceFromEnd })=>{this.loadMoreResult(distanceFromEnd)}}
-        refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />}
-        keyExtractor={this.keyExtractor}
-        data={this.state.chatList}
-        renderItem={this.renderItem}
-        />
-        <TouchableOpacity 
-            onPress={this.goToSearchContacts}
-            style={styles.buttonStyle}>
-            <Icon2 name={"add-circle"} size={50} />
-        </TouchableOpacity>      
-        
-        {this.state.goToSearchContacts
-        &&
+          <View style={{width:DEVICE_WIDTH, backgroundColor:"#999999"}}>
+            <Text style={{fontSize:20,alignSelf:"center"}}>Your ChatList</Text>
+          </View>
+          <FlatList 
+          onEndReachedThreshold={0.01}
+          onEndReached={({ distanceFromEnd })=>{this.loadMoreResult(distanceFromEnd)}}
+          refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />}
+          keyExtractor={this.keyExtractor}
+          data={list}
+          renderItem={this.renderItem}
+          />
+          {this.state.goToChatBoolean
+          &&
             <Modal
-            visible={this.state.goToSearchContacts}
-            onRequestClose={() => { this.setState({goToSearchContacts:false})  } }
+            visible={this.state.goToChatBoolean}
+            onRequestClose={() => { this.setState({goToChatBoolean:false})  } }
             animationType="slide">
-            <SearchContacts/>
+            <ChatBox navigation={this.props.navigation}/>
             </Modal>
-        } 
+          }
         </View>
         )
     }
