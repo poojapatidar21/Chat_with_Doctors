@@ -11,12 +11,12 @@ let list=[
     {
         imageUrl:gourav,
         name:"Dr. Gourav Goel",
-        specialisation:"diet_advice",
+        specialisation:"Diet Advice",
     },
     {
         imageUrl:pooja,
         name:"Dr. Pooja Patidar",
-        specialisation:"nerological",
+        specialisation:"Dermatologist",
     }
 ]
 
