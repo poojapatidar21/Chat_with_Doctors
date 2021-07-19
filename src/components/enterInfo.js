@@ -314,7 +314,8 @@ class EnterInfo extends Component{
                     >
                 </FlatList>
               </View>}
-            {this.state.userCategory === "Doctor" && (
+            {this.state.userCategory === "Doctor"
+              && (
               <View>
             <TouchableOpacity
             onPress={this.showCategoryModal}
