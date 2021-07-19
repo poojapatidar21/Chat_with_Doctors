@@ -11,7 +11,7 @@ let list=[
     {
         imageUrl:gourav,
         name:"Dr. Gourav Goel",
-        specialisation:"Diet Advice",
+        specialisation:"Diet & Nutrition",
     },
     {
         imageUrl:pooja,
@@ -49,8 +49,9 @@ export class ListOfDoctors extends Component{
         }
         else
         {
+            console.log(list);
             let list1 = list.filter((item) => {
-                return item.specialisation.toLowerCase().match(name)
+                return item.specialisation.toLowerCase()===name.toLowerCase()
               })
             this.setState({list:list1});
         }

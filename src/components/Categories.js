@@ -108,8 +108,7 @@ export class Categories extends Component {
     if (this.state.selectedItemName === item.name) {
       return (
         // eslint-disable-next-line react/jsx-no-comment-textnodes
-        <ListItem onPress={() => this.onSelect(item.name)}>
-          // eslint-disable-next-line react-native/no-inline-styles
+        <ListItem onPress={() => this.onSelect(item.name)} style={{borderColor:"#000000",borderWidth:1 }}>
           <View style={{flexDirection: 'column'}}>
             <Image
               source={item.imageUrl}
