@@ -35,7 +35,7 @@ let list = [
   },
   {
     imageUrl: diet_advice,
-    name: 'Diet & Nutrition ',
+    name: 'Diet advisor',
   },
   {
     imageUrl: gastronterology,

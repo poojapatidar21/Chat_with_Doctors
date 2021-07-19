@@ -12,7 +12,7 @@ let list=[
     {
         imageUrl:gourav,
         name:"Dr. Gourav Goel",
-        specialisation:"Diet & Nutrition",
+        specialisation:"Diet advisor",
     },
     {
         imageUrl:pooja,
@@ -47,7 +47,7 @@ export class ListOfDoctors extends Component{
         {
             console.log(list);
             let list1 = list.filter((item) => {
-                return item.specialisation.toLowerCase()===name.toLowerCase()
+                return item.specialisation===name
               })
             this.setState({list:list1});
         }
@@ -55,7 +55,7 @@ export class ListOfDoctors extends Component{
 
     render()
     {
-        console.log(this.state.selectedItemName,this.props.selectedItemName)
+        console.log(this.state.selectedItemName,"x",this.props.selectedItemName)
         if(this.state.selectedItemName!==this.props.selectedItemName)
         {
             this.getList(this.props.selectedItemName);
