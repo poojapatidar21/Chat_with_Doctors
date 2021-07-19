@@ -60,12 +60,6 @@ export default class ChatBox extends Component {
   }
   keyExtractorPost = (item, index) => index.toString()
 
-  componentWillUnmount() {
-      this.keyboardDidShowListener.remove();
-      this.keyboardDidHideListener.remove();
-      this.props.onRef(undefined);
-  }
-
   _keyboardDidShow(event) {
       this.setState({
           keyboardOffset: event.endCoordinates.height+40,
@@ -77,10 +71,6 @@ export default class ChatBox extends Component {
           keyboardOffset: 0,
       })
   }
-    backAction = () => {
-       
-        this.props.navigation.navigate("SignedIn",{value:"Chat"})
-    };
   async addMessage(message)
   {
       if(message.chatId===this.state.chatId)
@@ -149,10 +139,6 @@ export default class ChatBox extends Component {
       this.seenAllMessage();
     }
     this.setState({chatId:chatId});
-    this.backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      this.backAction
-    );
     this._isMounted = true;
     this.keyboardDidShowListener = Keyboard.addListener(
         'keyboardDidShow',
