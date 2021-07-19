@@ -1,6 +1,7 @@
 import React,{ Component } from "react";
 import { Image, View,TouchableOpacity, Modal, FlatList, Text } from "react-native";
 import { ListItem } from "react-native-elements";
+import { DoctorElement } from "./DoctorElement";
 
 const profilePic  =require("../images/profile-user.png");
 const pooja  =require("../images/poojaPatidar.jpg");
@@ -32,12 +33,7 @@ export class ListOfDoctors extends Component{
     keyExtractor = (item, index) => index.toString()
     renderItem = ({item}) => (
         <ListItem>
-            <Image source={item.imageUrl} 
-                style={{width: 100, height: 100, borderRadius: 400/ 2}} />
-            <ListItem.Content>
-                <ListItem.Title style={{fontSize:20}}>{item.name}</ListItem.Title>
-                <ListItem.Subtitle>{"Specialisation in "+item.specialisation}</ListItem.Subtitle>
-            </ListItem.Content>
+            <DoctorElement specialisation={item.specialisation}  name={item.name} imageUrl={item.imageUrl}/>
         </ListItem>
     )
 
