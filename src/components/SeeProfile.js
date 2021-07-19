@@ -28,7 +28,37 @@ export class SeeProfile extends Component {
     {
         return(
             <View style={styles.container}>
-
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={require("../images/poojaPatidar.jpg")}
+                        style={styles.image} resizeMode="cover"
+                    />
+                </View>
+                <View>
+                    <Text style={styles.headerText}>Pooja Patidar</Text>
+                </View>
+                <View>
+                    <Text style={styles.textStyle}>Specialisation in Dermatology</Text>
+                </View>
+                <View style={{paddingTop:20}}>
+                    <Text style={styles.details}>MBBS,MD,PHD</Text>
+                    <Text style={styles.details}>Experience: 5 Yrs</Text>
+                </View>
+                <View style={{paddingTop:20}}>
+                <Button title="Schedule Consultation" onPress={() => Alert.alert('Schedule')} />
+                </View>
+                
+                <View>
+                    <Text style={styles.abouts}>About</Text>
+                    <Text style={styles.about}>Mentored by: Dr. Anil K. Sao and Dr. Viswanath Balakrishnan
+                            Tools: Python | MySQL | Tkinter | Opencv | OS | Python Libraries
+                            • It’s difficult to count the numbers of layer in microscopic image and
+                            might have some error. Aim is to make it easier and precised to
+                            count total number layers, width of layers, gap between them.
+                            • Code will check the layers count across the drawn line by the user
+                            using opencv. Developed GUI to get Interact with images.
+                            • Use histogram and detect the lines as no. of peaks in the graph.</Text>
+                </View>
             </View> 
         );
     }
@@ -76,4 +106,42 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginBottom: 8,
     },
+    imageContainer: {
+        width: 150,
+        height: 150,
+        borderRadius: 200,
+        borderColor: 'black',
+        overflow: 'hidden',
+        marginVertical:5,
+    },
+    image: {
+        width: '100%' ,
+        height:'100%',
+        
+    },
+    headerText: {
+        fontSize: 30,
+        marginVertical: 5,
+    },
+    textStyle: {
+        fontSize:20,
+        marginVertical: 0,
+        textAlign: 'center',
+        opacity:0.7
+    },
+    details: {
+        fontSize:15,
+        marginVertical: 0,
+        textAlign: 'center',
+        opacity:0.5,
+    },
+    about: {
+        fontSize:15,
+        marginVertical: 0,
+    },
+    abouts: {
+        fontSize: 20,
+        marginVertical:10,
+    },
+    
 });
