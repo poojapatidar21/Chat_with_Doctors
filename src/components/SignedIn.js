@@ -1,7 +1,7 @@
 import React ,{Component} from "react";
 
 
-import {Platform, StatusBar, View, StyleSheet ,TouchableOpacity,TextInput,Dimensions,} from "react-native";
+import {Platform, StatusBar, View, StyleSheet ,TouchableOpacity,TextInput,Dimensions, Modal,} from "react-native";
 
 import { useNavigation } from '@react-navigation/native';
 import Icon2 from 'react-native-vector-icons/Ionicons';
@@ -38,6 +38,7 @@ class SignedIn extends Component {
       this.showSearch=this.showSearch.bind(this);
       this.hideSearch=this.hideSearch.bind(this);
       this.setCategory=this.setCategory.bind(this);
+      this.showChatModal=this.showChatModal.bind(this);
     }
     backAction = () => {   
         return true;
@@ -61,7 +62,10 @@ class SignedIn extends Component {
     {
       this.setState({selectedItemName:name});
     }
-
+    showChatModal()
+    {
+      this.setState({showChats:true});
+    }
     render()
     {
       return (
@@ -95,9 +99,11 @@ class SignedIn extends Component {
               >
                 <SearchIcon/>
               </TouchableOpacity>
-              <View style={styles.menu}>
+              <TouchableOpacity
+              onPress={this.showChatModal}
+              style={styles.menu}>
               <Icon name='message'color={iconColour} size={24}/>  
-              </View>
+              </TouchableOpacity>
             </View>    
           </View>
           {this.state.showChats

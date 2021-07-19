@@ -123,6 +123,11 @@ export class Chat extends Component{
       }
     }
 
+    async getList()
+    {
+      
+    }
+
     async onRefresh()
     {
       this.setState({refreshing:true});
