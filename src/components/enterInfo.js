@@ -313,13 +313,14 @@ class EnterInfo extends Component{
                     renderItem={this.renderuserCategoryItem}
                     >
                 </FlatList>
-            </View>}
-
+              </View>}
+            {this.state.userCategory === "Doctor" && (
+              <View>
             <TouchableOpacity
             onPress={this.showCategoryModal}
             style={{ width:"80%",}}
             >
-                <Text style={{
+              <Text style={{
                 width:"80%",
                 marginVertical:10,
                 minHeight: 35,
@@ -328,10 +329,10 @@ class EnterInfo extends Component{
                 color: this.state.CategoryTextColor}}
                 >
                 {this.state.CategoryText}
-                </Text>
-                </TouchableOpacity>
-                {this.state.showCategoryModal &&
-                    <View style={styles.list}>
+              </Text>
+            </TouchableOpacity>
+            {this.state.showCategoryModal &&
+              <View style={styles.list}>
                     
                 <FlatList style={{
                     maxHeight: 220,
@@ -368,7 +369,9 @@ class EnterInfo extends Component{
                 underlineColorAndroid="transparent"
                 onChangeText={text => this.setabout(text)}
                 />
-                </View>
+            </View>
+            </View>
+            )}
 
                 <TouchableOpacity
                 activeOpacity={1}
